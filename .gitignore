@@ -14,7 +14,7 @@ node_modules
 
 # Haxe export folder
 _build
-bin
+# bin
 bin_test
 bin_release
 

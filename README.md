@@ -18,6 +18,9 @@ this is a bootstrap project for a quick website with a Google Spreadsheet "datab
 
 ## todo
 
+- <https://docs.google.com/spreadsheets/d/e/2PACX-1vSRy1BrMibt-UinGRUxSniWqN6ntQOC3nzM22xrGT91M-u6wf8RmiRXJvO8e3zDdvy-PsN6LUxvY3J_/pubhtml>
+- <https://docs.google.com/spreadsheets/d/1KhcMZv01CfiAvCPhL8nVTXEJ2oRcLgSlj5UNX40jTsM/edit?usp=sharing>;
+
 
 ## Json definition aka AST
 
