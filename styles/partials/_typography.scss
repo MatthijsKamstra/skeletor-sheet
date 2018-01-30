@@ -1,0 +1,89 @@
+/**
+Tinos
+	regular 400					@include font($tinos, normal, 400);
+	regular 400 Italic			@include font($tinos, italic, 400);
+	bold 700					@include font($tinos, normal, 700);
+	bold 700 Italic				@include font($tinos, italic, 700);
+
+PT Sans Caption
+	regular 400					@include font($ptsanscaption, normal, 400);
+	bold 700					@include font($ptsanscaption, normal, 700);
+
+Eczar
+	regular 400					@include font($eczar, normal, 400);
+	medium 500					@include font($eczar, normal, 500);
+	semi-bold 600				@include font($eczar, normal, 600);
+	bold 700					@include font($eczar, normal, 700);
+	extra-bold 800				@include font($eczar, normal, 800);
+*/
+
+$tinos			: 'Tinos', serif;
+$ptsanscaption	: 'PT Sans Caption', sans-serif;
+$eczar 			: 'Eczar', serif;
+$bitter			: 'Bitter', serif;
+
+//  -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol" !default;
+
+
+// Echt text logo
+// @example 		<h1 class="logo-text">Echt<span>.</span></h1>
+.logo-text{
+	@include font($bitter, normal, 700);
+	color: $logo-black;
+	line-height: 39px;
+	span{
+		color: $gray;
+	}
+}
+
+// not sure this is the best solution
+body {
+	@include font($ptsanscaption, normal, 400);
+}
+
+.font_{
+	&tinos_{
+		&regular{
+			@include font($tinos, normal, 400);
+		}
+		&regular_italic{
+			@include font($tinos, italic, 400);
+		}
+		&bold{
+			@include font($tinos, normal, 700);
+		}
+		&bold_italic{
+			@include font($tinos, italic, 700);
+		}
+	}
+	&ptsans_{
+		&regular{
+			@include font($ptsanscaption, normal, 400);
+		}
+		&bold{
+			@include font($ptsanscaption, normal, 700);
+		}
+	}
+	&eczar_{
+		&regular{
+			@include font($eczar, normal, 500);
+		}
+		&medium{
+			@include font($eczar, normal, 600);
+		}
+		&semibold{
+			@include font($eczar, normal, 700);
+		}
+		&bold{
+			@include font($eczar, normal, 800);
+		}
+		&extrabold{
+			@include font($eczar, normal, 900);
+		}
+	}
+	&bitter_{
+		&bold{
+			@include font($bitter, normal, 700);
+		}
+	}
+}

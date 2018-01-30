@@ -1,0 +1,83 @@
+
+div[class*="block-"] {
+	margin-bottom: 100px;
+	border: 1px solid pink;
+}
+.block-{
+	&email{
+		background-color: $bg-dark-blue;
+	}
+	&featured{
+		background-color: $bg-featured;
+	}
+	&hero{
+		background-color: $bg-dark-blue;
+	}
+	&mantra{
+		background-color: $white;
+		text-align: center;
+		h2{
+			@include font($eczar, normal, 800);
+			color: $blue ;
+			font-size: 24px;
+			letter-spacing: 2px;
+			line-height: 42px;
+		}
+		.quote{
+			// background-color: $pink;
+			@include font($ptsanscaption, normal, 700);
+			margin: auto;
+			color: $red;
+			font-size: 52px;
+			line-height: 67px;
+			width: 80%;
+			margin-bottom: 30px;
+			span {
+				background-color: $orange;
+			}
+		}
+	}
+	&other{
+
+	}
+	&sponsor{
+	}
+	&theme{
+		text-align: center;
+		.container{
+			padding: 40px 80px;
+			width: 75%;
+			background-color: $bg-yellow;
+		}
+		h2{
+			color: #242424;
+			font-family: Eczar;
+			font-size: 49px;
+			font-weight: bold;
+			letter-spacing: 6px;
+			line-height: 87px;
+			text-align: center;
+
+		}
+		h3{
+			color: #FECF32;
+			font-family: "PT Sans Caption";
+			font-size: 15px;
+			font-weight: bold;
+			letter-spacing: 2px;
+			line-height: 19px;
+			text-align: center;
+		}
+	}
+}
+
+.btn-readmore{
+	color: #212529;
+    background-color: transparent;
+	border: 2px solid $red;
+    padding: .375rem .75rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    border-radius: 0rem;
+}
+

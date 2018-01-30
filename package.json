@@ -1,0 +1,61 @@
+{
+	"license": "MIT",
+	"name": "skeletor-sheet",
+	"version": "0.0.1",
+	"description": "Quick site with google-sheet (Skeletor-Sheet)",
+	"private": true,
+	"author": "Matthijs Kamstra aka [mck]",
+	"scripts": {
+		"prewatch": "haxe build_all.hxml",
+		"watch": "npm run watch:heroku",
+		"watch:heroku": "onchange 'src/*' 'src/*/*' 'src/*/*/*' 'src/*/*/*/*' -v -- haxe build_all.hxml & nodemon bin/heroku/index.js --ignore bin/heroku/_data/ --ignore bin/heroku/private/db/ & livereload bin/heroku -w 1000",
+		"watch:haxe": "onchange 'src/*' 'src/*/*' 'src/*/*/*' 'src/*/*/*/*' -v -- haxe build_all.hxml",
+
+		"build": "npm run build:release",
+		"build:release": "haxe build_all.hxml",
+		"heroku:folder": "cd 'bin/heroku'",
+
+		"deploy": "npm run build && npm run git:commit && npm run git:push && npm run launch",
+		"git:commit": "cd 'bin/heroku' && git add -A . && git commit -a -m 'update heroku'",
+		"git:push": "cd 'bin/heroku' && git push heroku master",
+
+		"push": "npm run push:git && npm run push:heroku",
+		"push:git": "cd 'bin/heroku' && git push --tags origin HEAD:master",
+		"push:heroku": "cd 'bin/heroku' && git push heroku master",
+
+		"launch": "open https://fonk-slack-thumb.herokuapp.com/",
+		"start": "npm run build && cd 'bin/heroku' && heroku local web",
+		"start:old": "npm run build && open http://localhost:5000 &&  cd 'bin/heroku' && heroku local web",
+		"start:new": "npm run build && open http://localhost:5000 && cd 'bin/heroku' && node index.js",
+
+
+		"test": "echo \"Error: no test specified\" && exit 1",
+
+		"_scss2": "npm run scss:compilesourcemap -- -w & npm run scss:livereload ",
+		"_scss3": "npm run scss:compilesourcemap && npm run scss:compilesourcemap -- -w & npm run scss:livereload ",
+		"_scss": "npm run scss:compilesourcemap && npm run scss:watch & npm run scss:livereload ",
+
+		"scss": "npm run scss:compilesourcemap && npm run scss:compilesourcemap -- -w & npm run scss:livereload ",
+
+		"scss:watch": "node-sass --watch public/styles -o css",
+		"scss:compile": "node-sass public/styles/main.scss public/styles/main.css",
+		"scss:compilesourcemap": "node-sass public/styles/main.scss public/styles/main.css --source-map true",
+
+		"scss:livereload": "livereload public/",
+
+		"build:sass": "node-sass -r --output-style compressed src/style.scss -o dist",
+		"watch:sass": "npm run build:sass && npm run build:sass -- -w",
+
+		"build1:sass": "node-sass -r --output-style compressed src/style.scss -o dist",
+ 		"watch1:sass": "npm run build:sass && npm run build:sass -- -w"
+
+
+	},
+	"dependencies": {},
+	"devDependencies": {
+		"livereload": "latest",
+		"node-sass": "^3.4.2",
+		"nodemon": "^1.13.3",
+		"onchange": "^3.0.2"
+	}
+}
