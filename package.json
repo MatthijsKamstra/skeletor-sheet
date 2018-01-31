@@ -28,6 +28,7 @@
 		"start:old": "npm run build && open http://localhost:5000 &&  cd 'bin/heroku' && heroku local web",
 		"start:new": "npm run build && open http://localhost:5000 && cd 'bin/heroku' && node index.js",
 
+		"haxe:nekoserver" : "cd 'bin' && open http://localhost:2000/ && nekotools server",
 
 		"test": "echo \"Error: no test specified\" && exit 1",
 
