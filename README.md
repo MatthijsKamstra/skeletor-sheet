@@ -14,12 +14,13 @@ this is a bootstrap project for a quick website with a Google Spreadsheet "datab
 - [Haxe](http://www.haxe.org) The Cross-platform Toolkit for transpiling to javascript
 - [Bootstrap v4.0.0](https://getbootstrap.com/) for css framework
 - [Fontawesome v5](https://fontawesome.com) for nice icons
-- [google spreadsheets](https://docs.google.com/spreadsheets/u/0/)
+- [Google Spreadsheets](https://docs.google.com/spreadsheets/u/0/)
+- [Vue.js](https://vuejs.org/) a progressive framework for building user interfaces.
+- [sass](http://sass-lang.com/) CSS with superpowers
 
-## todo
+## TODO
 
-- <https://docs.google.com/spreadsheets/d/e/2PACX-1vSRy1BrMibt-UinGRUxSniWqN6ntQOC3nzM22xrGT91M-u6wf8RmiRXJvO8e3zDdvy-PsN6LUxvY3J_/pubhtml>
-- <https://docs.google.com/spreadsheets/d/1KhcMZv01CfiAvCPhL8nVTXEJ2oRcLgSlj5UNX40jTsM/edit?usp=sharing>;
+
 
 
 ## Json definition aka AST
@@ -37,8 +38,14 @@ haxelib install
 Some stuff that doesn't load easily by haxelib
 
 ```
-# I sometimes us my personal set haxe-externs
+# haxe-js-kit for externs
+haxelib git js-kit https://github.com/clemos/haxe-js-kit.git haxelib
+
+# I sometimes use my personal set haxe-externs
 haxelib git hxexterns https://github.com/MatthijsKamstra/hxexterns.git
+
+# cutting edge vue.js externs
+haxelib git vue https://github.com/MatthijsKamstra/Vue.hx.git
 ```
 
 
