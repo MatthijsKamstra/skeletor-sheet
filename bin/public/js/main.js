@@ -3,9 +3,9 @@
 var Main = function() {
 	this.publicSpreadsheetUrl = "https://docs.google.com/spreadsheets/d/1KhcMZv01CfiAvCPhL8nVTXEJ2oRcLgSlj5UNX40jTsM/edit?usp=sharing";
 	var _gthis = this;
-	console.log("Hello 'Example Javascript'");
 	window.document.addEventListener("DOMContentLoaded",function(event) {
 		window.console.log("Dom ready :: build: " + model_constants_App.BUILD + " ");
+		_gthis.initHomepage();
 		_gthis.initTabletop();
 	});
 };
@@ -13,39 +13,18 @@ Main.main = function() {
 	var app = new Main();
 };
 Main.prototype = {
-	initTabletop: function() {
+	initHomepage: function() {
+		console.log("initHomepage");
+		this.vm = new Vue({ el : "#app", data : { showloading : true, sheet : [], message : "Content from this page from google spreadsheet and vue.js"}});
+	}
+	,initTabletop: function() {
 		Tabletop.init({ key : this.publicSpreadsheetUrl, callback : $bind(this,this.showInfo), simpleSheet : true});
 	}
 	,showInfo: function(data,tabletop) {
 		this.showSnackbar("Successfully processed!");
 		window.console.log(data);
-		this.initPageAbout();
-	}
-	,initPageAbout: function() {
-		var _gthis = this;
-		new Vue({ el : "#app", data : { message : "Hello to " + model_constants_App.PROJECT_NAME + "!", items : [{ message : "Something clever as point one"},{ message : "But more important is point two"}]}});
-		this.showLoading(true);
-		setTimeout(function() {
-			_gthis.showLoading(false);
-		},3000);
-	}
-	,showLoading: function(isLoading,isDark) {
-		if(isDark == null) {
-			isDark = false;
-		}
-		var x = window.document.getElementById("loading");
-		if(x == null) {
-			var div = window.document.createElement("div");
-			div.id = "loading";
-			div.innerHTML = "<i class=\"fas fa-sync-alt fa-spin fa-3x\"></i><span class=\"sr-only\">Loading...</span>";
-			window.document.body.appendChild(div);
-			x = div;
-		}
-		if(isLoading) {
-			x.className = "show";
-		} else {
-			x.className = "hide";
-		}
+		this.vm.showloading = false;
+		this.vm.sheet = data;
 	}
 	,showSnackbar: function(msg) {
 		var x = window.document.getElementById("snackbar");
@@ -65,8 +44,7 @@ Main.prototype = {
 var model_constants_App = function() { };
 var $_, $fid = 0;
 function $bind(o,m) { if( m == null ) return null; if( m.__id__ == null ) m.__id__ = $fid++; var f; if( o.hx__closures__ == null ) o.hx__closures__ = {}; else f = o.hx__closures__[m.__id__]; if( f == null ) { f = function(){ return f.method.apply(f.scope, arguments); }; f.scope = o; f.method = m; o.hx__closures__[m.__id__] = f; } return f; }
-model_constants_App.BUILD = "2018-02-01 00:47:57";
-model_constants_App.PROJECT_NAME = "[SkeletorSheet]";
+model_constants_App.BUILD = "2018-02-01 15:34:05";
 Main.main();
 })();
 

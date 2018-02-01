@@ -26,15 +26,40 @@
 
 	</head>
 	<body>
-		<!-- <h1>Hello (example_javascript), world!</h1> -->
+
+		<nav class="navbar navbar-dark bg-dark">
+			<div class="container">
+				<a class="navbar-brand" href="#"><i class="far fa-comment"></i> Skeletor Sheet</a>
+			</div>
+		</nav>
+
 		<div class="container">
+			<h1>Homepage</h1>
 			<div id="app">
 				<p>{{ message }}</p>
-				<li v-for="item in items">
-			  		{{ item.message }}
-				</li>
-		  	</div>
+
+				<div id="loadervue" v-if="showloading">
+					<i class="fas fa-sync-alt fa-spin fa-3x"></i>
+					<span class="sr-only">Loading...</span>
+				</div><!-- /#loadervue -->
+
+				<div class="row">
+					<div class="col-sm-12 col-md-6 col-lg-4" v-for="item in sheet">
+						<div class="card">
+							<img class="card-img-top" v-bind:src="item.img" alt="Card image cap">
+							<div class="card-body">
+								<h5 class="card-title">{{ item.title }}</h5>
+					  			<p class="card-text">{{ item.body }}</p>
+								<a href="#" class="btn btn-primary">read more</a>
+							</div>
+						</div>
+					</div>
+				</div>
+
+		  	</div><!-- /#app2 -->
+
 		</div><!-- /.container -->
+
 
 		<!-- Optional JavaScript -->
 		<!-- jQuery first, then Popper.js, then Bootstrap JS -->
