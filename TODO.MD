@@ -9,6 +9,33 @@ build smarter `npm run ...` scripts
 - <http://fuzzytolerance.info/blog/2016/10/28/From-Gulp-to-NPM-Scripts/>
 - <http://lucasmreis.github.io/blog/npm-is-an-amazing-build-tool/>
 
+
+### paralel commands
+
+- <https://www.npmjs.com/package/npm-run-all>
+
+pro: also works on windows (meh)
+con: `build:*` vs `haxe:build`
+
+```bash
+# now
+npm run clean && npm run build:css && npm run build:js && npm run build:html
+# After:
+npm-run-all clean build:*
+```
+
+```bash
+npm install npm-run-all --save-dev
+```
+
+
+
+- <https://github.com/Qard/onchange>
+
+```
+npm install onchange --save-dev
+```
+
 ### learn
 
 use Google Spreadsheet as a database

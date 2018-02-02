@@ -6,57 +6,81 @@
 	"private": true,
 	"author": "Matthijs Kamstra aka [mck]",
 	"scripts": {
-		"prewatch": "haxe build_all.hxml",
+
 		"watch": "npm run watch:heroku",
-		"watch:heroku": "onchange 'src/*' 'src/*/*' 'src/*/*/*' 'src/*/*/*/*' -v -- haxe build_all.hxml & nodemon bin/heroku/index.js --ignore bin/heroku/_data/ --ignore bin/heroku/private/db/ & livereload bin/heroku -w 1000",
-		"watch:haxe": "onchange 'src/*' 'src/*/*' 'src/*/*/*' 'src/*/*/*/*' -v -- haxe build_all.hxml",
+		"-start:heroku": "npm run build && cd 'bin/heroku' && heroku local web",
+		"-start:heroku:old": "npm run build && open http://localhost:5000 &&  cd 'bin/heroku' && heroku local web",
+		"-start:heroku:new": "npm run build && open http://localhost:5000 && cd 'bin/heroku' && node index.js",
+		"scss": "npm run build:scss:compilesourcemap && npm run build:scss:compilesourcemap -- -w & npm run livereload:scss",
+		"haxe": "npm run build:haxe:all",
+		"start:haxe": "npm run build:haxe:all && npm run watch:haxe",
+
+		"deploy": "npm run build && npm run git:commit && npm run git:push",
+		"deploy:heroku": "npm run build && npm run git:heroku:commit && npm run git:heroku:push && npm run server:heroku:launch",
+		"deploy:github": "npm run build:haxe:all && npm run build:scss &&  npm run cmd:folder:copy",
+
+		"watch:haxe": "npm run watch:onchange:haxe",
+		"watch:scss": "npm run watch:onchange:scss",
+		"watch:onchange:haxe": "onchange 'src/*.hx' 'src/*/*.hx' 'src/*/*/*.hx' 'src/*/*/*/*.hx' -v -- npm run build:haxe",
+		"watch:onchange:heroku": "onchange 'src/*' 'src/*/*' 'src/*/*/*' 'src/*/*/*/*' -v -- haxe build_all.hxml & nodemon bin/heroku/index.js --ignore bin/heroku/_data/ --ignore bin/heroku/private/db/ & livereload bin/heroku -w 1000",
+		"watch:onchange:scss": "onchange 'styles/*.scss' 'styles/*/*.scss' 'styles/*/*/*.scss' 'styles/*/*/*/*.scss' -v -- npm run build:scss",
+		"-watch:scss:old": "node-sass --watch public/styles -o css",
+		"-watch:scss": "npm run build:scss && npm run build:scss -- -w",
+		"-watch:scss2": "npm run build:scss && npm run build:scss -- -w & livereload bin/",
 
 		"build": "npm run build:release",
 		"build:release": "haxe build_all.hxml",
-		"heroku:folder": "cd 'bin/heroku'",
 
-		"deploy": "npm run build && npm run git:commit && npm run git:push && npm run launch",
-		"git:commit": "cd 'bin/heroku' && git add -A . && git commit -a -m 'update heroku'",
-		"git:push": "cd 'bin/heroku' && git push heroku master",
+		"build:haxe"						: "haxe build.hxml",
+		"build:haxe:all"					: "haxe build_all.hxml",
+
+		"build:gitbook:all"					: "npm run build:gitbook:remove && npm run build:gitbook && npm run build:gitbook:rename",
+		"build:gitbook:remove" 				: "npm run build:gitbook:remove:docs & npm run build:gitbook:remove:book",
+		"build:gitbook:remove:docs" 		: "rm -rf docs",
+		"build:gitbook:remove:book" 		: "rm -rf _book",
+		"build:gitbook:rename" 				: "mv _book docs",
+		"build:gitbook" 					: "gitbook build",
+
+		"cmd:folder:remove" 				: "rm -rf docs",
+		"cmd:folder:copy" 					: "cp -r bin/* docs",
+
+		"-build:sass"						: "node-sass -r --output-style compressed src/style.scss -o dist",
+		"-build:scss2"						: "npm run build:scss:compilesourcemap -- -w & npm run livereload:scss",
+		"-build:scss3"						: "npm run build:scss:compilesourcemap && npm run buil:scss:compilesourcemap -- -w & npm run livereload:scss",
+		"-build:scss:compile"				: "sass styles/main.scss public/styles/main.css",
+		"-build:scss:compilesourcemap"		: "sass styles/main.scss public/styles/main.css --source-map true",
+		"build:scss"						: "npm run build:nodescss:compilesourcemap",
+		"build:nodescss:compile"			: "node-sass styles/main.scss bin/public/css/main.css",
+		"build:nodescss:compilesourcemap"	: "node-sass styles/main.scss bin/public/css/main.css --source-map true",
+
+		"gitbook" 							: "npm run gitbook:install && npm run gitbook:update",
+		"gitbook:install" 					: "gitbook install",
+		"gitbook:update" 					: "gitbook update",
+
+		"git:heroku:commit": "cd 'bin/heroku' && git add -A . && git commit -a -m 'update heroku'",
+		"git:heroku:push": "cd 'bin/heroku' && git push heroku master",
+		"git:commit": "git add -A . && git commit -a -m 'update docs haxejs documentation'",
+		"git:push": "git push",
 
 		"push": "npm run push:git && npm run push:heroku",
 		"push:git": "cd 'bin/heroku' && git push --tags origin HEAD:master",
 		"push:heroku": "cd 'bin/heroku' && git push heroku master",
 
-		"launch": "open https://fonk-slack-thumb.herokuapp.com/",
-		"start": "npm run build && cd 'bin/heroku' && heroku local web",
-		"start:old": "npm run build && open http://localhost:5000 &&  cd 'bin/heroku' && heroku local web",
-		"start:new": "npm run build && open http://localhost:5000 && cd 'bin/heroku' && node index.js",
+		"server:haxe" : "cd 'bin' && open http://localhost:2000/ && nekotools server",
+		"server:heroku:launch": "open https://fonk-slack-thumb.herokuapp.com/",
 
-		"haxe:nekoserver" : "cd 'bin' && open http://localhost:2000/ && nekotools server",
-
-		"test": "echo \"Error: no test specified\" && exit 1",
-
-		"_scss2": "npm run scss:compilesourcemap -- -w & npm run scss:livereload ",
-		"_scss3": "npm run scss:compilesourcemap && npm run scss:compilesourcemap -- -w & npm run scss:livereload ",
-		"_scss": "npm run scss:compilesourcemap && npm run scss:watch & npm run scss:livereload ",
-
-		"scss": "npm run scss:compilesourcemap && npm run scss:compilesourcemap -- -w & npm run scss:livereload ",
-
-		"scss:watch": "node-sass --watch public/styles -o css",
-		"scss:compile": "node-sass public/styles/main.scss public/styles/main.css",
-		"scss:compilesourcemap": "node-sass public/styles/main.scss public/styles/main.css --source-map true",
-
-		"scss:livereload": "livereload public/",
-
-		"build:sass": "node-sass -r --output-style compressed src/style.scss -o dist",
-		"watch:sass": "npm run build:sass && npm run build:sass -- -w",
-
-		"build1:sass": "node-sass -r --output-style compressed src/style.scss -o dist",
- 		"watch1:sass": "npm run build:sass && npm run build:sass -- -w"
-
-
+		"heroku:folder": "cd 'bin/heroku'",
+		"livereload:scss": "livereload public/"
 	},
 	"dependencies": {},
 	"devDependencies": {
 		"livereload": "latest",
-		"node-sass": "^3.4.2",
-		"nodemon": "^1.13.3",
-		"onchange": "^3.0.2"
+		"node-sass": "latest",
+		"nodemon": "latest",
+		"onchange": "latest",
+		"autoprefixer": "latest",
+        "browser-sync": "latest",
+        "npm-run-all": "latest",
+        "postcss-cli": "latest"
 	}
 }

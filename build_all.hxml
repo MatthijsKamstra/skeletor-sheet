@@ -4,7 +4,7 @@
 # -cmd rm -rf bin_release
 
 # Uncomment (#) more build scripts if you need more
--cmd echo '\n----- build all (projectname: example_javascript) -----'
+-cmd echo '\n----- build all (projectname: skeletor sheet) -----'
 -cmd echo '> build target js (build.hxml)'
 -cmd haxe build.hxml
 
