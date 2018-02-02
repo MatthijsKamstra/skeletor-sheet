@@ -22,9 +22,9 @@ this is a bootstrap project for a quick website with a Google Spreadsheet "datab
 
 ## TODO
 
-- [ ] automatic build / watch
 - [ ] `Haxe` only vs `js` only
 - [ ] `neko` vs "other" server solution
+- [x] automatic build / watch
 - [x] store temp values in local storage
 - [x] bootstrap/fontawesome/default css
 - [x] google sheet + js lib to get data
