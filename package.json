@@ -28,8 +28,8 @@
 		"-watch:scss": "npm run build:scss && npm run build:scss -- -w",
 		"-watch:scss2": "npm run build:scss && npm run build:scss -- -w & livereload bin/",
 
-		"build": "npm run build:release",
-		"build:release": "haxe build_all.hxml",
+		"build"								: "npm run build:release",
+		"build:release"						: "haxe build_all.hxml",
 
 		"build:haxe"						: "haxe build.hxml",
 		"build:haxe:all"					: "haxe build_all.hxml",
