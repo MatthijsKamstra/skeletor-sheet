@@ -18,10 +18,13 @@
 
 		<!-- Bootstrap CSS -->
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+		<!-- animate.css -->
+		<link href="https://cdn.jsdelivr.net/npm/animate.css@3.5.1" rel="stylesheet" type="text/css">
 
 		<!-- custom css -->
 		<link rel="stylesheet" href="public/css/default.css" >
 		<link rel="stylesheet" href="public/css/main.css" >
+
 
 	</head>
 	<body>
@@ -36,11 +39,16 @@
 			<h1>Homepage</h1>
 			<div id="app">
 				<p>{{ message }}</p>
-
-				<div id="loadervue" v-if="showloading">
-					<i class="fas fa-sync-alt fa-spin fa-3x"></i>
-					<span class="sr-only">Loading...</span>
-				</div><!-- /#loadervue -->
+				<transition
+					name="custom-classes-transition"
+					enter-active-class="animated fadeIn"
+					leave-active-class="animated fadeOut"
+				>
+					<div id="loadervue" v-if="showloading">
+						<i class="fas fa-sync-alt fa-spin fa-3x"></i>
+						<span class="sr-only">Loading...</span>
+					</div><!-- /#loadervue -->
+				</transition>
 
 				<div class="row">
 					<div class="col-sm-12 col-md-6 col-lg-4" v-for="item in sheet">

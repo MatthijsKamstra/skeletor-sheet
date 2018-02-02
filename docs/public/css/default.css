@@ -161,7 +161,7 @@ input:checked + .slider:before {
 }
 
 
-#loadervue, #loading {
+#loading {
 	visibility: hidden; /* Hidden by default. Visible on click */
 	height: 100%;
 	width: 100%;
@@ -178,8 +178,24 @@ input:checked + .slider:before {
 	align-items: center;
 	justify-content: center;
 }
+#loadervue {
+	height: 100%;
+	width: 100%;
+	z-index: 700;
+	display: block;
+	position: absolute;
+	/* border: 1px solid pink; */
+	top: 0;
+	left: 0;
 
-#loadervue, #loading.show {
+	background-color: rgba(0, 0, 0, 0.10);
+
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+#loading.show {
 	visibility: visible; /* Show the snackbar */
 	/* Add animation: Take 0.5 seconds to fade in and out the snackbar.
 	However, delay the fade out process for 2.5 seconds */
