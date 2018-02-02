@@ -3,6 +3,7 @@ package;
 import js.Browser;
 import js.Browser.*;
 import js.html.*;
+import js.html.Storage;
 
 import model.constants.App;
 
@@ -12,28 +13,65 @@ import js.Tabletop;
 /**
  * @author Matthijs Kamstra aka [mck]
  * MIT
- *
  */
 class Main {
 
 	var publicSpreadsheetUrl = 'https://docs.google.com/spreadsheets/d/1KhcMZv01CfiAvCPhL8nVTXEJ2oRcLgSlj5UNX40jTsM/edit?usp=sharing';
 	var vm:Vue;
 
+	// content array
+	var contentArray : Array<{}> = [];
+
+	// storage
+	var hasStorage : Bool = false;
+	var storageName = 'skeletor';
+
+	public var storage  ( get_storage  , set_storage  ) : String;
+	private var _storage  : String = null;
+
+	function get_storage  () : String {
+		if ( window.localStorage.getItem(storageName) != null){
+			_storage = window.localStorage.getItem(storageName);
+			contentArray = haxe.Json.parse(_storage).data;
+			hasStorage = true;
+		}
+		return _storage ;
+	}
+	function set_storage (value : String) : String {
+		var obj = {
+			date: Date.now(),
+			data: value
+		}
+		window.localStorage.setItem(storageName, haxe.Json.stringify(obj));
+		contentArray = haxe.Json.parse(haxe.Json.stringify(value));
+		hasStorage = true;
+		return _storage  = value;
+	}
+
+
 	public function new () {
 		document.addEventListener("DOMContentLoaded", function(event) {
 			console.log('Dom ready :: build: ${App.BUILD} ');
+
+			/**
+			 *  first check if we visited the site before, then use that data first.
+			 *  then update anyway, just to show the latest data
+			 */
+
+			// check for localStorage data
+			if( storage != null ) trace('hasStorage : ${hasStorage}');
+
 			initHomepage();
 			initTabletop();
 		});
 	}
 
 	function initHomepage (){
-		trace('initHomepage');
 		vm = new Vue({
 			el: '#app',
 			data: {
-				showloading: true,
-				sheet: [],
+				showloading: !hasStorage,
+				sheet: contentArray,
 				message: 'Content from this page from google spreadsheet and vue.js'
 			}
 		});
@@ -50,13 +88,14 @@ class Main {
 	}
 
 	function showInfo(data, tabletop) {
-		// Browser.alert('Successfully processed!');
-		showSnackbar('Successfully processed!');
-		console.log(data);
-		// initPageAbout();
+		// Browser.alert('Successfully updated!');
+		showSnackbar('Successfully updated!');
+		// console.log(data);
 		vm.showloading = false;
 		vm.sheet = data;
+		storage = data;
 	}
+
 
 	/**
 	 *  @param isDark -
