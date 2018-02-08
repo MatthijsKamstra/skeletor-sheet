@@ -29,25 +29,6 @@ class Main {
 	public var storage  ( get_storage  , set_storage  ) : String;
 	private var _storage  : String = null;
 
-	function get_storage  () : String {
-		if ( window.localStorage.getItem(storageName) != null){
-			_storage = window.localStorage.getItem(storageName);
-			contentArray = haxe.Json.parse(_storage).data;
-			hasStorage = true;
-		}
-		return _storage ;
-	}
-	function set_storage (value : String) : String {
-		var obj = {
-			date: Date.now(),
-			data: value
-		}
-		window.localStorage.setItem(storageName, haxe.Json.stringify(obj));
-		contentArray = haxe.Json.parse(haxe.Json.stringify(value));
-		hasStorage = true;
-		return _storage  = value;
-	}
-
 
 	public function new () {
 		document.addEventListener("DOMContentLoaded", function(event) {
@@ -147,6 +128,29 @@ class Main {
 		}, 3000);
 
 	}
+
+	// ____________________________________ getter/setter ____________________________________
+
+	function get_storage  () : String {
+		if ( window.localStorage.getItem(storageName) != null){
+			_storage = window.localStorage.getItem(storageName);
+			contentArray = haxe.Json.parse(_storage).data;
+			hasStorage = true;
+		}
+		return _storage ;
+	}
+	function set_storage (value : String) : String {
+		var obj = {
+			date: Date.now(),
+			data: value
+		}
+		window.localStorage.setItem(storageName, haxe.Json.stringify(obj));
+		contentArray = haxe.Json.parse(haxe.Json.stringify(value));
+		hasStorage = true;
+		return _storage  = value;
+	}
+
+
 
 	static public function main () {
 		var app = new Main ();
