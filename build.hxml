@@ -2,6 +2,7 @@
 # -lib js-kit
 -lib vue
 -lib hxexterns
+-lib hx-html
 # -lib haxelow
 # -lib hxnodejs
 

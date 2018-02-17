@@ -42,8 +42,12 @@ class Main {
 			// check for localStorage data
 			if( storage != null ) trace('hasStorage : ${hasStorage}');
 
+			trace (Template.createVue());
+
 			initHomepage();
 			initTabletop();
+
+
 		});
 	}
 

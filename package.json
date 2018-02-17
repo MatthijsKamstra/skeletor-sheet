@@ -7,6 +7,8 @@
 	"author": "Matthijs Kamstra aka [mck]",
 	"scripts": {
 
+		"start": "npm run server:haxe & npm run livereload:bin & npm run build:haxe:all && npm run watch:haxe",
+
 		"watch": "npm run watch:heroku",
 		"-start:heroku": "npm run build && cd 'bin/heroku' && heroku local web",
 		"-start:heroku:old": "npm run build && open http://localhost:5000 &&  cd 'bin/heroku' && heroku local web",
@@ -70,7 +72,9 @@
 		"server:heroku:launch": "open https://fonk-slack-thumb.herokuapp.com/",
 
 		"heroku:folder": "cd 'bin/heroku'",
-		"livereload:scss": "livereload public/"
+
+		"livereload:bin"					: "livereload bin/",
+		"livereload:public"					: "livereload public/"
 	},
 	"dependencies": {},
 	"devDependencies": {
