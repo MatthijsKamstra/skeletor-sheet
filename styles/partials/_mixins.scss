@@ -1,3 +1,39 @@
+/**
+
+767px wide and below
+768px wide and up
+992px wide and up
+1200px wide and up
+
+@include breakpoint(sm) {
+    float: none;
+    width: 100%;
+}
+**/
+@mixin breakpoint($class) {
+  @if $class == xs {
+    @media (max-width: 767px) { @content; }
+  }
+
+  @else if $class == sm {
+    @media (min-width: 768px) { @content; }
+  }
+
+  @else if $class == md {
+    @media (min-width: 992px) { @content; }
+  }
+
+  @else if $class == lg {
+    @media (min-width: 1200px) { @content; }
+  }
+
+  @else {
+    @warn "Breakpoint mixin supports: xs, sm, md, lg";
+  }
+}
+
+
+
 //  Clearfix
 @mixin clear-float {
     content: "";
