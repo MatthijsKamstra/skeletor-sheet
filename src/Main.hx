@@ -4,9 +4,7 @@ import js.Browser;
 import js.Browser.*;
 import js.html.*;
 import js.html.Storage;
-
 import model.constants.App;
-
 import vue.Vue;
 import js.Tabletop;
 
@@ -15,24 +13,23 @@ import js.Tabletop;
  * MIT
  */
 class Main {
-
 	var publicSpreadsheetUrl = 'https://docs.google.com/spreadsheets/d/1KhcMZv01CfiAvCPhL8nVTXEJ2oRcLgSlj5UNX40jTsM/edit?usp=sharing';
 	var vm:Vue;
 
 	// content array
-	var contentArray : Array<{}> = [];
+	var contentArray:Array<{}> = [];
 
 	// storage
-	var hasStorage : Bool = false;
+	var hasStorage:Bool = false;
 	var storageName = 'skeletor';
 
-	public var storage  ( get_storage  , set_storage  ) : String;
-	private var _storage  : String = null;
+	public var storage(get, set):String;
 
+	private var _storage:String = null;
 
-	public function new () {
+	public function new() {
 		document.addEventListener("DOMContentLoaded", function(event) {
-			console.log('Dom ready :: build: ${App.BUILD} ');
+			console.log('Dom ready :: build: ${App.getBuildDate()} ');
 
 			/**
 			 *  first check if we visited the site before, then use that data first.
@@ -40,18 +37,17 @@ class Main {
 			 */
 
 			// check for localStorage data
-			if( storage != null ) trace('hasStorage : ${hasStorage}');
+			if (storage != null)
+				trace('hasStorage : ${hasStorage}');
 
-			trace (Template.createVue());
+			trace(Template.createVue());
 
 			initHomepage();
 			initTabletop();
-
-
 		});
 	}
 
-	function initHomepage (){
+	function initHomepage() {
 		vm = new Vue({
 			el: '#app',
 			data: {
@@ -62,14 +58,12 @@ class Main {
 		});
 	}
 
-	function initTabletop(){
-		Tabletop.init(
-			{
-				key: publicSpreadsheetUrl,
-				callback: showInfo,
-				simpleSheet: true
-			}
-		);
+	function initTabletop() {
+		Tabletop.init({
+			key: publicSpreadsheetUrl,
+			callback: showInfo,
+			simpleSheet: true
+		});
 	}
 
 	function showInfo(data, tabletop) {
@@ -81,16 +75,15 @@ class Main {
 		storage = data;
 	}
 
-
 	/**
 	 *  @param isDark -
 	 */
-	function showLoading(isLoading:Bool,isDark:Bool = false) {
+	function showLoading(isLoading:Bool, isDark:Bool = false) {
 		// Get the loading DIV
 		var x = document.getElementById("loading");
 
 		// if no #loading exists, create it
-		if(x == null){
+		if (x == null) {
 			var div = document.createDivElement();
 			div.id = 'loading';
 			// div.innerHTML = '<i class="fa fa-refresh fa-spin fa-3x fa-fw"></i><span class="sr-only">Loading...</span>';
@@ -100,7 +93,7 @@ class Main {
 			x = div;
 		}
 
-		if(isLoading){
+		if (isLoading) {
 			// Add the "show" class to DIV
 			x.className = "show";
 		} else {
@@ -113,7 +106,7 @@ class Main {
 		var x = document.getElementById("snackbar");
 
 		// if no #snackbar exists, create it
-		if(x == null){
+		if (x == null) {
 			var div = document.createDivElement();
 			div.id = 'snackbar';
 			document.body.appendChild(div);
@@ -127,23 +120,23 @@ class Main {
 		x.className = "show";
 
 		// After 3 seconds, remove the show class from DIV
-		untyped setTimeout(function(){
+		untyped setTimeout(function() {
 			x.className = x.className.replace("show", "");
 		}, 3000);
-
 	}
 
 	// ____________________________________ getter/setter ____________________________________
 
-	function get_storage  () : String {
-		if ( window.localStorage.getItem(storageName) != null){
+	function get_storage():String {
+		if (window.localStorage.getItem(storageName) != null) {
 			_storage = window.localStorage.getItem(storageName);
 			contentArray = haxe.Json.parse(_storage).data;
 			hasStorage = true;
 		}
-		return _storage ;
+		return _storage;
 	}
-	function set_storage (value : String) : String {
+
+	function set_storage(value:String):String {
 		var obj = {
 			date: Date.now(),
 			data: value
@@ -151,12 +144,10 @@ class Main {
 		window.localStorage.setItem(storageName, haxe.Json.stringify(obj));
 		contentArray = haxe.Json.parse(haxe.Json.stringify(value));
 		hasStorage = true;
-		return _storage  = value;
+		return _storage = value;
 	}
 
-
-
-	static public function main () {
-		var app = new Main ();
+	static public function main() {
+		var app = new Main();
 	}
 }

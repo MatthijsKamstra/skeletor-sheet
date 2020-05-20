@@ -1,0 +1,8 @@
+-lib vue
+-lib hxexterns
+-lib hx-html
+-cp src
+-main Main
+-js docs/public/js/main.js
+# -D source-map-content
+# -D state=debug

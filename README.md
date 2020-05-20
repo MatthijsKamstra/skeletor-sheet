@@ -6,7 +6,6 @@ I needed a quick prototype with a Google Spreadsheet as database
 
 It seems a good idea to make a skeleton project for this.
 
-
 ## Desciption project
 
 this is a bootstrap project for a quick website with a Google Spreadsheet "database"
@@ -59,7 +58,6 @@ haxelib git hxexterns https://github.com/MatthijsKamstra/hxexterns.git
 haxelib git vue https://github.com/MatthijsKamstra/Vue.hx.git
 ```
 
-
 ## Files
 
 ```
@@ -70,6 +68,19 @@ haxelib git vue https://github.com/MatthijsKamstra/Vue.hx.git
 + styles
 ```
 
+## Google sheets
+
+[source](https://medium.com/@jaejohns/how-to-use-google-sheets-as-your-website-database-b0f2f13d0396)
+
+`File > Publish to the web`
+
+Make sure you have entire document selected in the dropdown option. You can choose to automatically publish changes by checking the feature on the bottom. If you don’t do this, you will have to publish the spreadsheet every time you make a change.
+
+For this example used document. First url is the 'web-publish' version that doesn't work. The second is the 'shared' document url, that works
+
+- <https://docs.google.com/spreadsheets/d/e/2PACX-1vSRy1BrMibt-UinGRUxSniWqN6ntQOC3nzM22xrGT91M-u6wf8RmiRXJvO8e3zDdvy-PsN6LUxvY3J_/pubhtml>
+- <https://docs.google.com/spreadsheets/d/1KhcMZv01CfiAvCPhL8nVTXEJ2oRcLgSlj5UNX40jTsM/edit?usp=sharing>;
+
 ## vscode
 
 To make it work with vscode you need build files without:
@@ -77,10 +88,4 @@ To make it work with vscode you need build files without:
 - c
 - v
 
-
-
 ## sources
-
-
-
-

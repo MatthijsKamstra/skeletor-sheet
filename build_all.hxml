@@ -5,12 +5,12 @@
 
 # Uncomment (#) more build scripts if you need more
 -cmd echo '\n----- build all (projectname: skeletor sheet) -----'
--cmd echo '> build target js (build.hxml)'
--cmd haxe build.hxml
+# -cmd echo '> build target js (build.hxml)'
+# -cmd haxe build.hxml
 
 # Add an other target (for example JavaScript)
-#-cmd echo '> build target js (build_js.hxml)'
-#-cmd haxe build_js.hxml
+-cmd echo '> build target js (build_js.hxml)'
+-cmd haxe build_js.hxml
 
 # Create a release and/or debug build
 #-cmd echo '> build target js (build_release.hxml)'

@@ -3,15 +3,17 @@ package model.constants;
 import haxe.macro.Context;
 
 class App {
+	public static inline var URL:String = "https://";
 
-	public static inline var URL : String  = "https://";
+	public static var PROJECT_NAME:String = '[SkeletorSheet]';
 
-	public static var BUILD : String = getBuildDate();
-	public static var PROJECT_NAME : String = '[SkeletorSheet]';
-
-	macro public static function getBuildDate() {
+	public static macro function getBuildDate() {
+		#if !display
 		var date = Date.now().toString();
-		return Context.makeExpr(date, Context.currentPos());
+		return macro $v{date};
+		#else
+		var date = Date.now().toString();
+		return macro $v{date};
+		#end
 	}
-
 }
